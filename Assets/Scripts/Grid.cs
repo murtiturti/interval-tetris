@@ -50,6 +50,11 @@ public class Grid
         return new Vector3(x, y) * cellSize + originPos;
     }
 
+    public Vector3 GetCellWorldPosition(int x, int y)
+    {
+        return GetCell(x, y).GetCenterWorldPosition();
+    }
+
     public int Width()
     {
         return width;
@@ -58,5 +63,27 @@ public class Grid
     public int Height()
     {
         return height;
+    }
+
+    public bool CheckGrid(int x, int y, Block.FallDirection fallDirection)
+    {
+        if (fallDirection == Block.FallDirection.Down)
+        {
+            return GetCell(x, y - 1).IsOccupied();
+        }
+        else
+        {
+            return GetCell(x, y + 1).IsOccupied();
+        }
+    }
+    
+    public void SetOccupied(int x, int y, bool occupied)
+    {
+        GetCell(x, y).SetOccupied(occupied);
+    }
+
+    public bool CheckOutOfBounds(int newY)
+    {
+        return newY < 0 || newY >= height;
     }
 }

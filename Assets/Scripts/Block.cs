@@ -1,11 +1,11 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class Block : Subject
+public class Block : MonoBehaviour, IObserver
 {
-
     public int x, y;
     public BlockData blockData;
 
@@ -43,63 +43,67 @@ public class Block : Subject
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.RightArrow) && !_isPlaced)
+        _timer += Time.deltaTime;
+        if (_timer >= timerMax)
         {
-            blockDirection = BlockDirection.Right;
-            NotifyObservers(BlockStates.Moving);
-        }
-        else if (Input.GetKeyDown(KeyCode.LeftArrow) && !_isPlaced)
-        {
-            blockDirection = BlockDirection.Left;
-            NotifyObservers(BlockStates.Moving);
-        }
-
-        if (Input.GetKeyDown(KeyCode.UpArrow))
-        {
-            fallDirection = FallDirection.Up;
-        }
-        else if (Input.GetKeyDown(KeyCode.DownArrow))
-        {
-            fallDirection = FallDirection.Down;
-        }
-        if (Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.UpArrow))
-        {
-            timerMax -= 0.005f;
-        }
-
-        if (Input.GetKeyUp(KeyCode.DownArrow) || Input.GetKeyUp(KeyCode.UpArrow))
-        {
-            timerMax = 2f;
-        }
-        if (!_isPlaced && _timer < timerMax)
-        {
-            _timer += Time.deltaTime;
-        }
-        else if (!_isPlaced && _timer >= timerMax)
-        {
-            _timer = 0f;
-            switch (fallDirection)
+            if (blockState == BlockStates.Falling)
             {
-                case FallDirection.Down:
-                    y--;
-                    break;
-                case FallDirection.Up:
-                    y++;
-                    break;
-                default:
-                    break;
+                if (fallDirection == FallDirection.Down)
+                {
+                    Move(Vector3.down);
+                }
+                else if (fallDirection == FallDirection.Up)
+                {
+                    Move(Vector3.up);
+                }
             }
-            NotifyObservers(BlockStates.Falling);
-        }
-        if (blockState == BlockStates.Placed)
-        {
-            NotifyObservers(blockState);
-            blockState = BlockStates.Idle;
+            else if (blockState == BlockStates.Idle)
+            {
+                blockState = BlockStates.Placed;
+                EventManager.CallBlockPlaced(x, y, this);
+            }
+            _timer = 0f;
         }
     }
 
     public void SetPlaced(bool placed)
     {
         _isPlaced = placed;
+    }
+
+    public void OnNotify(BlockStates state)
+    {
+        blockState = state == BlockStates.RowClean ? BlockStates.Falling : state;
+        // TODO: Find a way to figure out if the bottom row or the top row is being cleaned
+    }
+
+    public void OnNotify(BlockStates state, bool bottom)
+    {
+        if (state == BlockStates.RowClean)
+        {
+            if (bottom)
+            {
+                if (y < 5)
+                {
+                    Move(Vector3.down);
+                }
+            }
+            else
+            {
+                if (y > 5)
+                {
+                    Move(Vector3.up);
+                }
+            }
+        }
+    }
+
+    private void Move(Vector3 direction)
+    {
+        transform.position += direction.normalized;
+        EventManager.SetCellOccupation(x, y, false);
+        y += (int) direction.y;
+        x += (int) direction.x;
+        EventManager.SetCellOccupation(x, y, true);
     }
 }

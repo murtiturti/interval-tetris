@@ -5,4 +5,6 @@ using UnityEngine;
 public interface IObserver
 {
     void OnNotify(BlockStates state);
+
+    void OnNotify(BlockStates state, bool bottom);
 }

@@ -11,6 +11,8 @@ public class ContainerManager : MonoBehaviour
     void Start()
     {
         SetUpContainers();
+        EventManager.BlockPlaced += OnBlockPlacement;
+        EventManager.CleanRow += CleanRow;
     }
 
     public Container GetContainer(bool bottom, int index)
@@ -51,6 +53,21 @@ public class ContainerManager : MonoBehaviour
         foreach (var cont in topContainers)
         {
             cont.bottom = false;
+        }
+    }
+
+    private void OnBlockPlacement(int x, int y, Block block)
+    {
+        var bottom = y < 6;
+        var index = x;
+        var container = GetContainer(bottom, index);
+        container.AddToStack(block);
+        var isCorrect = container.CheckPlacement(block);
+        if (isCorrect)
+        {
+            var rowCleaned = container.NeedsRowClean();
+            container.OnCorrectPlacement();
+            EventManager.NotifyAll(BlockStates.RowClean, bottom);
         }
     }
 }

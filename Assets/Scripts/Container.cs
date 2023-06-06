@@ -42,16 +42,47 @@ public class Container : MonoBehaviour
         if (stack.Count == 1)
         {
             var temp = stack[0];
-            // TODO: unoccupy cell
             stack.RemoveAt(0);
+            EventManager.SetCellOccupation(temp.x, temp.y, false);
+            EventManager.OnBlockDestroyed(temp);
             Destroy(temp.gameObject);
         }
         else
         {
             var temp = stack[0];
             stack.RemoveAt(0);
+            EventManager.SetCellOccupation(temp.x, temp.y, false);
+            EventManager.OnBlockDestroyed(temp);
             Destroy(temp.gameObject);
             // TODO: make fall
         }
+    }
+
+    public void OnCorrectPlacement()
+    {
+        if (stack.Count >= 2)
+        {
+            // Clear stack
+            foreach (var block in stack)
+            {
+                EventManager.SetCellOccupation(block.x, block.y, false);
+                // TODO: Unsubscribe from block from GridManager
+                EventManager.OnBlockDestroyed(block);
+                Destroy(block.gameObject);
+            }
+
+            return;
+        }
+        EventManager.OnCleanRow(bottom);
+    }
+
+    public bool NeedsRowClean()
+    {
+        if (stack.Count >= 2)
+        {
+            return true;
+        }
+
+        return false;
     }
 }
