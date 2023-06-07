@@ -69,5 +69,6 @@ public class ContainerManager : MonoBehaviour
             container.OnCorrectPlacement();
             EventManager.NotifyAll(BlockStates.RowClean, bottom);
         }
+        EventManager.OnReadyForSpawn();
     }
 }

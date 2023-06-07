@@ -7,6 +7,9 @@ public class GridManager : Subject
 {
 
     private Grid _grid;
+    
+    public Grid Grid => _grid;
+    
     [SerializeField] private Spawner spawner;
     private Block _lastSpawned;
     

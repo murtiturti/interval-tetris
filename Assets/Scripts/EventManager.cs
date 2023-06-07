@@ -11,6 +11,7 @@ public class EventManager : MonoBehaviour
     public static event Action<bool> CleanRow; //bool indicates bottom
     public static event Action<BlockStates, bool> NotifyAllObservers; //Event to notify all observers so that we can cleeeeaaaan the row ohh yeaahhh
     // wah wah wahh wa wah wah wahhh
+    public static event Action ReadyForSpawn; //Event to notify that the grid is ready for a new block to spawn
     
     // Start is called before the first frame update
     void Start()
@@ -47,5 +48,10 @@ public class EventManager : MonoBehaviour
     public static void NotifyAll(BlockStates state, bool bottom)
     {
         NotifyAllObservers?.Invoke(state, bottom);
+    }
+    
+    public static void OnReadyForSpawn()
+    {
+        ReadyForSpawn?.Invoke();
     }
 }

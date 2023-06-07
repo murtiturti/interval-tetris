@@ -4,9 +4,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public class IntervalGenerator : MonoBehaviour
+public static class IntervalGenerator
 {
-    const int SampleRate = 44100;
+    private const int SampleRate = 44100;
     private static string[] notes = new[] {"A", "Bb", "B", "C", "Db", "D", "Eb", "E", "F", "Gb", "G", "Ab"};
     
     public static void CreateClip(float freq, out AudioClip clip)
