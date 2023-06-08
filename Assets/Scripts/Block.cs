@@ -64,6 +64,16 @@ public class Block : MonoBehaviour, IObserver
             }
             _timer = 0f;
         }
+        if (blockDirection == BlockDirection.Left)
+        {
+            Move(Vector3.left);
+            blockDirection = BlockDirection.None;
+        }
+        else if (blockDirection == BlockDirection.Right)
+        {
+            Move(Vector3.right);
+            blockDirection = BlockDirection.None;
+        }
     }
 
     public void SetPlaced(bool placed)

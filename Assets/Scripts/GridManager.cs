@@ -23,6 +23,8 @@ public class GridManager : Subject
         EventManager.BlockDestroyed += RemoveObserver;
         EventManager.CleanRow += OnCleanRow;
         EventManager.NotifyAllObservers += NotifyObservers;
+        InputManager.fallDirectionChanged += ChangeFallDirection;
+        InputManager.blockHorizontalMovement += ChangeHorizontalDirection;
     }
 
     // Update is called once per frame
@@ -56,5 +58,24 @@ public class GridManager : Subject
     private void OnCleanRow(bool isBottom)
     {
         NotifyObservers(BlockStates.RowClean, isBottom);
+    }
+
+    private void ChangeFallDirection(Block.FallDirection direction)
+    {
+        _lastSpawned.fallDirection = direction;
+    }
+    
+    private void ChangeHorizontalDirection(Block.BlockDirection direction)
+    {
+        // TODO: Add occupancy check
+        var x = _lastSpawned.x;
+        x += direction == Block.BlockDirection.Left ? -1 : 1;
+        if (!_grid.CheckGrid(x, _lastSpawned.y, _lastSpawned.fallDirection) && !_grid.CheckHorizontalBounds(x))
+        {
+            _lastSpawned.x = x;
+            _lastSpawned.blockDirection = direction;
+            return;
+        }
+        _lastSpawned.blockDirection = Block.BlockDirection.None;
     }
 }

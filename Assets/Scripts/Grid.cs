@@ -84,6 +84,13 @@ public class Grid
 
     public bool CheckOutOfBounds(int newY)
     {
+        // Returns true if out of bounds
         return newY < 0 || newY >= height;
+    }
+    
+    public bool CheckHorizontalBounds(int newX)
+    {
+        // Returns true if out of bounds
+        return newX < 0 || newX >= width;
     }
 }
