@@ -40,11 +40,12 @@ public class IntervalPlayer : MonoBehaviour
         }
 
         _instance = this;
+        _audioSource = GetComponent<AudioSource>();
     }
 
     private void Start()
     {
-        _audioSource = GetComponent<AudioSource>();
+        
     }
 
     public void PlayInterval(bool ascending)
@@ -54,6 +55,11 @@ public class IntervalPlayer : MonoBehaviour
 
     private IEnumerator PlayIntervalCoroutine(bool ascending)
     {
+        if (_audioSource == null)
+        {
+            Debug.Log("Audio source is null");
+            yield return null;
+        }
         for (int i = 0; i < 2; i++)
         {
             if (i == 0)

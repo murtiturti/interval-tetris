@@ -29,10 +29,11 @@ public static class IntervalGenerator
         string note1, out string note2)
     {
         string[] intervals = new[] {"Unison", "m2", "M2", "m3", "M3", "P4", "Tritone", "P5", "m6", "M6", "m7", "M7", "Octave"};
-        var step = Random.Range(0, intervals.Length + 1);
+        var step = Random.Range(0, intervals.Length);
         interval = intervals[step];
         freq2 = freq1 * Mathf.Pow(1.06f,  step);
         note2 = GetNoteByStep(note1, step);
+        Debug.Log(note2);
     }
 
     private static string GetNoteByStep(string first, int step)

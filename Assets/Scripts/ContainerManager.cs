@@ -67,7 +67,7 @@ public class ContainerManager : MonoBehaviour
         {
             var rowCleaned = container.NeedsRowClean();
             container.OnCorrectPlacement();
-            EventManager.NotifyAll(BlockStates.RowClean, bottom);
+            //EventManager.NotifyAll(BlockStates.RowClean, bottom);
         }
         EventManager.OnReadyForSpawn();
     }

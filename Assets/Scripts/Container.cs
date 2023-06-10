@@ -68,11 +68,13 @@ public class Container : MonoBehaviour
                 EventManager.SetCellOccupation(block.x, block.y, false);
                 // TODO: Unsubscribe from block from GridManager
                 EventManager.OnBlockDestroyed(block);
+                stack.Remove(block);
                 Destroy(block.gameObject);
             }
 
             return;
         }
+        // If the placed block is the first block on the container, clean the row
         EventManager.OnCleanRow(bottom);
     }
 

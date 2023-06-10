@@ -1,7 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using Random = UnityEngine.Random;
 
 public class GameManager : MonoBehaviour
 {
@@ -41,6 +43,7 @@ public class GameManager : MonoBehaviour
         _score = 0;
         _highScore = PlayerPrefs.GetInt(HighScoreKey, 0);
         EventManager.ReadyForSpawn += OnSpawnReady;
+        OnSpawnReady();
     }
 
     // Update is called once per frame

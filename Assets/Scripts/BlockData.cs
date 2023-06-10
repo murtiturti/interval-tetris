@@ -14,15 +14,14 @@ public class BlockData : ScriptableObject
     {
         Color[] colors =
         {
-            new Color(1f, 0.50049f, 0f), new Color(0.8867924f, 0.2969918f, 0.3032145f),
-            new Color(0.9245283f, 0.8183578f, 0.248576f), new Color(0.8605546f, 0.9254902f, 0.2470588f),
-            new Color32(0x99, 0xEC,0x34, 0xFF), new Color32(0x4E, 0xE9, 0x3F, 0xFF),
-            new Color32(0x34, 0xEC, 0x9C, 0xFF), new Color32(0x32, 0xE9, 0x65, 0xFF),
-            new Color32(0x38, 0xE7, 0x7F, 0xFF), new Color32(0x2F, 0xE7, 0xB8, 0xFF),
-            new Color32(0x3A, 0xE0, 0xF3, 0xFF), new Color32(0x29, 0x9A, 0xF5, 0xFF),
-            new Color32(0x57, 0x40, 0xFF, 0xFF)
+            new Color(1f, 0.50049f, 0f), new Color(0.8867924f, 0.2969918f, 0.3032145f), // A, Bb
+            new Color(0.9245283f, 0.8183578f, 0.248576f), new Color(0.8605546f, 0.9254902f, 0.2470588f), // B, C
+            new Color32(0x99, 0xEC,0x34, 0xFF), new Color32(0x4E, 0xE9, 0x3F, 0xFF), // Db, D
+            new Color32(0x34, 0xEC, 0x9C, 0xFF), new Color32(0x32, 0xE9, 0x65, 0xFF), // Eb, E
+            new Color32(0x38, 0xE7, 0x7F, 0xFF), new Color32(0x2F, 0xE7, 0xB8, 0xFF), // F, Gb
+            new Color32(0x3A, 0xE0, 0xF3, 0xFF), new Color32(0x29, 0x9A, 0xF5, 0xFF), // G, Ab
         };
-        string[] names = {"A", "A#", "B", "C", "C#", "D", "D#", "E", "F", "F#", "G", "G#"};
+        string[] names = {"A", "Bb", "B", "C", "Db", "D", "Eb", "E", "F", "Gb", "G", "Ab"};
 
         for (int i = 0; i < names.Length; i++)
         {

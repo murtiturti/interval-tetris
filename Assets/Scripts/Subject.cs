@@ -17,11 +17,19 @@ public abstract class Subject : MonoBehaviour
         _observers.Remove(observer);
     }
 
-    protected void NotifyObservers(BlockStates state, bool bottom)
+    protected void NotifyObservers(BlockStates state)
     {
         _observers.ToList().ForEach((_observer) =>
         {
             _observer.OnNotify(state);
         });
     }
-}
+
+    protected void NotifyObservers(BlockStates state, bool bottom)
+    {
+        _observers.ToList().ForEach((_observer) =>
+        {
+            _observer.OnNotify(state, bottom);
+        });
+    }
+ }
