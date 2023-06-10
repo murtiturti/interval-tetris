@@ -21,8 +21,8 @@ public class Cell
     public Vector3 GetCenterWorldPosition()
     {
         var pos = new Vector3();
-        pos.x = x + (size/2f) + originPos.x;
-        pos.y = y + (size / 2f) + originPos.y;
+        pos.x = originPos.x + x * size + size / 2f;
+        pos.y = originPos.y + y * size + size / 2f;
         return pos;
     }
 

@@ -19,7 +19,7 @@ public class GridManager : Subject
 
     private void Awake()
     {
-        _grid = new Grid(6, 11, 1f, Vector3.down * 5.5f + Vector3.left * 3f);
+        _grid = new Grid(6, 11, 12f/11f, Vector3.down * 7f + Vector3.left * 3.25f);
     }
 
     // Start is called before the first frame update

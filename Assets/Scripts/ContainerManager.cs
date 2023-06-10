@@ -69,6 +69,8 @@ public class ContainerManager : MonoBehaviour
             container.OnCorrectPlacement();
             //EventManager.NotifyAll(BlockStates.RowClean, bottom);
         }
+        // TODO: check if container's stack is full
+        // If so, invoke game over, else invoke ready for spawn
         EventManager.OnReadyForSpawn();
     }
 }

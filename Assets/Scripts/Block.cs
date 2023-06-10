@@ -89,11 +89,11 @@ public class Block : MonoBehaviour, IObserver
         {
             if (fallDirection == FallDirection.Down)
             {
-                Move(Vector3.down);
+                Move(DirectionConstants.down);
             }
             else if (fallDirection == FallDirection.Up)
             {
-                Move(Vector3.up);
+                Move(DirectionConstants.up);
             }
         }
         else if (state == BlockStates.Idle)
@@ -111,14 +111,14 @@ public class Block : MonoBehaviour, IObserver
             {
                 if (y < 5)
                 {
-                    Move(Vector3.down);
+                    Move(DirectionConstants.down);
                 }
             }
             else
             {
                 if (y > 5)
                 {
-                    Move(Vector3.up);
+                    Move(DirectionConstants.up);
                 }
             }
         }
@@ -128,12 +128,12 @@ public class Block : MonoBehaviour, IObserver
     {
         if (direction == BlockDirection.Left)
         {
-            Move(Vector3.left);
+            Move(DirectionConstants.left);
             blockDirection = BlockDirection.None;
         }
         else if (direction == BlockDirection.Right)
         {
-            Move(Vector3.right);
+            Move(DirectionConstants.right);
             blockDirection = BlockDirection.None;
         }
     }
@@ -145,7 +145,7 @@ public class Block : MonoBehaviour, IObserver
 
     private void Move(Vector3 direction)
     {
-        transform.position += direction.normalized;
+        transform.position += direction;
         EventManager.SetCellOccupation(x, y, false);
         y += (int) direction.y;
         x += (int) direction.x;
