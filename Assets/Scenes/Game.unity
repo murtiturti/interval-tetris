@@ -2777,7 +2777,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   _sensetivity: 10
-  _continuousDetection: 0
+  _continuousDetection: 1
   _swipeDetectionMode: 2
 --- !u!4 &1075406560
 Transform:
