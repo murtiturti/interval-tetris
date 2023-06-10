@@ -71,11 +71,17 @@ public class Container : MonoBehaviour
                 stack.Remove(block);
                 Destroy(block.gameObject);
             }
-
+            EventManager.OnScoreChange(50);
             return;
         }
         // If the placed block is the first block on the container, clean the row
         EventManager.OnCleanRow(bottom);
+        EventManager.OnScoreChange(100);
+    }
+
+    public bool IsStackFull()
+    {
+        return stack.Count > 5;
     }
 
     public bool NeedsRowClean()

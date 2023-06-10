@@ -10,18 +10,10 @@ public class EventManager : MonoBehaviour
     public static event Action<Block> BlockDestroyed; // Destroyed block
     public static event Action<bool> CleanRow; //bool indicates bottom
     public static event Action ReadyForSpawn; //Event to notify that the grid is ready for a new block to spawn
-    
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public static event Action GameOver; //Event to notify that the game is over
+    public static event Action<int> ScoreChanged; //Event to notify that the score has changed
+    public static event Action<int, UIManager.UpdateType> UpdateUI; //Event to notify that the UI needs to be updated
+    public static event Action<string> UpdateInterval; //Event to notify that the interval needs to be updated
     
     public static void SetCellOccupation(int x, int y, bool occupied)
     {
@@ -46,5 +38,25 @@ public class EventManager : MonoBehaviour
     public static void OnReadyForSpawn()
     {
         ReadyForSpawn?.Invoke();
+    }
+    
+    public static void OnGameOver()
+    {
+        GameOver?.Invoke();
+    }
+
+    public static void OnScoreChange(int score)
+    {
+        ScoreChanged?.Invoke(score);
+    }
+
+    public static void OnUpdateUI(int score, UIManager.UpdateType type)
+    {
+        UpdateUI?.Invoke(score, type);
+    }
+    
+    public static void UpdateIntervalUI(string interval)
+    {
+        UpdateInterval?.Invoke(interval);
     }
 }

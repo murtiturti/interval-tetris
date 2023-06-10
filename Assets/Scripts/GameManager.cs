@@ -43,6 +43,8 @@ public class GameManager : MonoBehaviour
         _score = 0;
         _highScore = PlayerPrefs.GetInt(HighScoreKey, 0);
         EventManager.ReadyForSpawn += OnSpawnReady;
+        EventManager.GameOver += OnGameOver;
+        EventManager.ScoreChanged += AddScore;
         OnSpawnReady();
     }
 
@@ -83,17 +85,24 @@ public class GameManager : MonoBehaviour
         IntervalPlayer.Instance.SetSecondClip(secondClip);
         gridManager.SetLastSpawned(spawned);
         IntervalPlayer.Instance.PlayInterval(true);
+        EventManager.UpdateIntervalUI(interval);
     }
 
     public void AddScore(int score)
     {
         _score += score;
-        scoreChanged.Invoke(_score);
+        // Send message to UI to update score
+        EventManager.OnUpdateUI(_score, UIManager.UpdateType.Score);
+        if (_score > _highScore)
+        {
+            _highScore = _score;
+            EventManager.OnUpdateUI(_highScore, UIManager.UpdateType.HighScore);
+        }
     }
 
-    public void OnGameOver()
+    private void OnGameOver()
     {
-        gameOverEvent.Invoke();
         PlayerPrefs.SetInt(HighScoreKey, _highScore);
+        // Send message to UI to show game over screen
     }
 }
