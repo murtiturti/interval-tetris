@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using GG.Infrastructure.Utils.Swipe;
 
 public class InputManager : MonoBehaviour
 {
@@ -43,6 +44,27 @@ public class InputManager : MonoBehaviour
         }
 
         _instance = this;
+    }
+
+    public void OnSwipeHandler(string id)
+    {
+        switch (id)
+        {
+            case DirectionId.ID_UP:
+                OnVerticalInput(Block.FallDirection.Up);
+                break;
+            case DirectionId.ID_DOWN:
+                OnVerticalInput(Block.FallDirection.Down);
+                break;
+            case DirectionId.ID_LEFT:
+                OnHorizontalInput(Block.BlockDirection.Left);
+                break;
+            case DirectionId.ID_RIGHT:
+                OnHorizontalInput(Block.BlockDirection.Right);
+                break;
+            default:
+                break;
+        }
     }
 
     private void OnVerticalInput(Block.FallDirection dir)
