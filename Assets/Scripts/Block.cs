@@ -43,6 +43,7 @@ public class Block : MonoBehaviour, IObserver
     // Update is called once per frame
     void Update()
     {
+        /*
         _timer += Time.deltaTime;
         if (_timer >= timerMax)
         {
@@ -74,6 +75,7 @@ public class Block : MonoBehaviour, IObserver
             Move(Vector3.right);
             blockDirection = BlockDirection.None;
         }
+        */
     }
 
     public void SetPlaced(bool placed)
@@ -83,8 +85,22 @@ public class Block : MonoBehaviour, IObserver
 
     public void OnNotify(BlockStates state)
     {
-        blockState = state == BlockStates.RowClean ? BlockStates.Falling : state;
-        // TODO: Find a way to figure out if the bottom row or the top row is being cleaned
+        if (state == BlockStates.Falling)
+        {
+            if (fallDirection == FallDirection.Down)
+            {
+                Move(Vector3.down);
+            }
+            else if (fallDirection == FallDirection.Up)
+            {
+                Move(Vector3.up);
+            }
+        }
+        else if (state == BlockStates.Idle)
+        {
+            blockState = BlockStates.Placed;
+            EventManager.CallBlockPlaced(x, y, this);
+        }
     }
 
     public void OnNotify(BlockStates state, bool bottom)
@@ -106,6 +122,25 @@ public class Block : MonoBehaviour, IObserver
                 }
             }
         }
+    }
+
+    public void OnHorizontalMovement(BlockDirection direction)
+    {
+        if (direction == BlockDirection.Left)
+        {
+            Move(Vector3.left);
+            blockDirection = BlockDirection.None;
+        }
+        else if (direction == BlockDirection.Right)
+        {
+            Move(Vector3.right);
+            blockDirection = BlockDirection.None;
+        }
+    }
+
+    public void OnVerticalInput(FallDirection direction)
+    {
+        fallDirection = direction;
     }
 
     private void Move(Vector3 direction)
