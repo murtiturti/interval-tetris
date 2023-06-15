@@ -70,6 +70,7 @@ public class GameManager : MonoBehaviour
 
     private void OnSpawnReady()
     {
+        IntervalPlayer.Instance.StopInterval();
         var note = PickNote();
         var freq = GetFrequencyOf(note);
         var interval = "";
