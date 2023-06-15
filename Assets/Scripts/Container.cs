@@ -63,7 +63,7 @@ public class Container : MonoBehaviour
         if (stack.Count >= 2)
         {
             // Clear stack
-            foreach (var block in stack)
+            foreach (var block in stack.ToArray())
             {
                 EventManager.SetCellOccupation(block.x, block.y, false);
                 // TODO: Unsubscribe from block from GridManager

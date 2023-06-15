@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class GridManager : Subject
 {
@@ -17,6 +18,8 @@ public class GridManager : Subject
     [SerializeField, Range(2f, 5f)]
     private float timerMax = 2f;
 
+    private int fallCount = 0;
+
     private void Awake()
     {
         _grid = new Grid(6, 11, 12f/11f, Vector3.down * 7f + Vector3.left * 3.25f);
@@ -30,6 +33,7 @@ public class GridManager : Subject
         EventManager.CleanRow += OnCleanRow;
         InputManager.fallDirectionChanged += ChangeFallDirection;
         InputManager.blockHorizontalMovement += ChangeHorizontalDirection;
+        EventManager.ReadyForSpawn += ResetFallCount;
         _timer = 0f;
     }
 
@@ -44,6 +48,7 @@ public class GridManager : Subject
         if (_timer >= timerMax)
         {
             _timer = 0f;
+            fallCount++;
             if (_lastSpawned.blockState == BlockStates.Falling)
             {
                 int projectedY = _lastSpawned.fallDirection == Block.FallDirection.Down ? _lastSpawned.y - 1 : _lastSpawned.y + 1;
@@ -56,6 +61,12 @@ public class GridManager : Subject
                     _lastSpawned.OnNotify(BlockStates.Idle);
                 }
             }
+        }
+
+        if (fallCount == 2)
+        {
+            IntervalPlayer.Instance.PlayInterval(true);
+            fallCount = 0;
         }
     }
     
@@ -93,5 +104,10 @@ public class GridManager : Subject
             return;
         }
         _lastSpawned.blockDirection = Block.BlockDirection.None;
+    }
+    
+    private void ResetFallCount()
+    {
+        fallCount = 0;
     }
 }

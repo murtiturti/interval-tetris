@@ -12,6 +12,8 @@ public class IntervalPlayer : MonoBehaviour
     private AudioClip _firstNote;
     private AudioClip _secondNote;
     
+    private Coroutine _playIntervalCoroutine;
+    
     public static IntervalPlayer Instance
     {
         get
@@ -43,14 +45,18 @@ public class IntervalPlayer : MonoBehaviour
         _audioSource = GetComponent<AudioSource>();
     }
 
-    private void Start()
-    {
-        
-    }
-
     public void PlayInterval(bool ascending)
     {
-        StartCoroutine(PlayIntervalCoroutine(ascending));
+        _playIntervalCoroutine = StartCoroutine(PlayIntervalCoroutine(ascending));
+    }
+    
+    public void StopInterval()
+    {
+        if (_playIntervalCoroutine != null)
+        {
+            StopCoroutine(_playIntervalCoroutine);
+            _audioSource.Stop();
+        }
     }
 
     private IEnumerator PlayIntervalCoroutine(bool ascending)
