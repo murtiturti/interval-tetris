@@ -4581,6 +4581,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f8e15550e24246e5a4b79d3c7bd6b26, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  holdMax: 0.5
+  timeOutMax: 1
 --- !u!1 &1614562661
 GameObject:
   m_ObjectHideFlags: 0
@@ -5334,15 +5336,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawner: {fileID: 1202314452}
   gridManager: {fileID: 670674126}
-  scoreChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  highScoreChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  gameOverEvent:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!4 &1841292195
 Transform:
   m_ObjectHideFlags: 0

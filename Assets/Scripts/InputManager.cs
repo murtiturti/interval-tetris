@@ -32,6 +32,20 @@ public class InputManager : MonoBehaviour
 
     public static event Action<Block.FallDirection> fallDirectionChanged;
     public static event Action<Block.BlockDirection> blockHorizontalMovement;
+    public static event Action SpeedUp;
+    public static event Action ResetSpeed;
+
+    #endregion
+
+    #region DoubleClickVars
+
+    private bool _firstClick = false;
+    private bool _doubleClick = false;
+    private float _holdTimer = 0f;
+    [SerializeField] private float holdMax = 0.5f;
+    private float _timeOutTimer = 0f;
+    [SerializeField] private float timeOutMax = 0.5f;
+    private bool _holding = false;
 
     #endregion
 
@@ -76,32 +90,65 @@ public class InputManager : MonoBehaviour
     {
         blockHorizontalMovement?.Invoke(dir);
     }
-
-    // Start is called before the first frame update
-    void Start()
+    
+    private void InvokeSpeedUp()
     {
-        
+        SpeedUp?.Invoke();
+    }
+    
+    private void InvokeResetSpeed()
+    {
+        ResetSpeed?.Invoke();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.UpArrow))
+        if (_firstClick)
         {
-            OnVerticalInput(Block.FallDirection.Up);
-        }
-        else if (Input.GetKeyDown(KeyCode.DownArrow))
-        {
-            OnVerticalInput(Block.FallDirection.Down);
+            _timeOutTimer += Time.deltaTime;
         }
 
-        if (Input.GetKeyDown(KeyCode.RightArrow))
+        if (_firstClick && _timeOutTimer >= timeOutMax && !_doubleClick)
         {
-            OnHorizontalInput(Block.BlockDirection.Right);
+            _firstClick = false;
+            _timeOutTimer = 0f;
+            Debug.Log("Time Out");
         }
-        else if (Input.GetKeyDown(KeyCode.LeftArrow))
+
+        if (Input.GetMouseButtonDown(0) && _firstClick)
         {
-            OnHorizontalInput(Block.BlockDirection.Left);
+            // second click
+            _doubleClick = true;
+            Debug.Log("Double Click");
+        }
+        else if (Input.GetMouseButtonDown(0))
+        {
+            _firstClick = true;
+            Debug.Log("First Click");
+        }
+
+        if (Input.GetMouseButton(0) && _doubleClick)
+        {
+            _holdTimer += Time.deltaTime;
+            _holding = true;
+            if (_holdTimer >= holdMax)
+            {
+                // raise event
+                InvokeSpeedUp();
+                _holdTimer = 0f;
+            }
+        }
+
+        if (Input.GetMouseButtonUp(0) && _holding)
+        {
+            _firstClick = false;
+            _doubleClick = false;
+            _holdTimer = 0f;
+            _timeOutTimer = 0f;
+            _holding = false;
+            // raise event
+            InvokeResetSpeed();
         }
     }
 }
