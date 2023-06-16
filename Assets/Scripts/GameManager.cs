@@ -16,9 +16,6 @@ public class GameManager : MonoBehaviour
     private Spawner spawner;
     [SerializeField]
     private GridManager gridManager;
-    
-    public CustomIntEvent scoreChanged, highScoreChanged;
-    public UnityEvent gameOverEvent;
 
     private string[] _noteNames = new[] {"A", "Bb", "B", "C", "Db", "D", "Eb", "E", "F", "Gb", "G", "Ab"};
     private Dictionary<string, float> _noteFrequencies = new Dictionary<string, float>()
@@ -54,7 +51,6 @@ public class GameManager : MonoBehaviour
         if (_score > _highScore)
         {
             _highScore = _score;
-            highScoreChanged.Invoke(_highScore);
         }
     }
     
@@ -104,6 +100,6 @@ public class GameManager : MonoBehaviour
     private void OnGameOver()
     {
         PlayerPrefs.SetInt(HighScoreKey, _highScore);
-        // Send message to UI to show game over screen
+        gridManager.GameOver();
     }
 }

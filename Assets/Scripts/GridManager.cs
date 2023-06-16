@@ -18,7 +18,9 @@ public class GridManager : Subject
     [SerializeField, Range(2f, 5f)]
     private float timerMax = 2f;
 
-    private int fallCount = 0;
+    private int _fallCount = 0;
+    
+    private bool _gameOver = false;
 
     private void Awake()
     {
@@ -44,11 +46,16 @@ public class GridManager : Subject
         {
             return;
         }
+
+        if (_gameOver)
+        {
+            return;
+        }
         _timer += Time.deltaTime;
         if (_timer >= timerMax)
         {
             _timer = 0f;
-            fallCount++;
+            _fallCount++;
             if (_lastSpawned.blockState == BlockStates.Falling)
             {
                 int projectedY = _lastSpawned.fallDirection == Block.FallDirection.Down ? _lastSpawned.y - 1 : _lastSpawned.y + 1;
@@ -63,10 +70,10 @@ public class GridManager : Subject
             }
         }
 
-        if (fallCount == 2)
+        if (_fallCount == 2)
         {
             IntervalPlayer.Instance.PlayInterval(true);
-            fallCount = 0;
+            _fallCount = 0;
         }
     }
     
@@ -108,6 +115,11 @@ public class GridManager : Subject
     
     private void ResetFallCount()
     {
-        fallCount = 0;
+        _fallCount = 0;
+    }
+    
+    public void GameOver()
+    {
+        _gameOver = true;
     }
 }
