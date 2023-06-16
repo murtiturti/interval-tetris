@@ -19,6 +19,7 @@ public class GridManager : Subject
     private float timerMax = 2f;
 
     private int _fallCount = 0;
+    private float _intervalTimer = 0f;
     
     private bool _gameOver = false;
 
@@ -54,6 +55,7 @@ public class GridManager : Subject
             return;
         }
         _timer += Time.deltaTime;
+        _intervalTimer += Time.deltaTime;
         if (_timer >= timerMax)
         {
             _timer = 0f;
@@ -72,10 +74,10 @@ public class GridManager : Subject
             }
         }
 
-        if (_fallCount == 2)
+        if (_intervalTimer >= 2.5f)
         {
             IntervalPlayer.Instance.PlayInterval(true);
-            _fallCount = 0;
+            _intervalTimer = 0f;
         }
     }
     
@@ -85,6 +87,7 @@ public class GridManager : Subject
         AddObserver(block);
         _lastSpawned.x = 2;
         _lastSpawned.y = 5;
+        _intervalTimer = 0f;
     }
     
     private void CellOccupied(int x, int y, bool occupied)
