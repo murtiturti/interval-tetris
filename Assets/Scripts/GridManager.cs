@@ -15,7 +15,7 @@ public class GridManager : Subject
 
     private object nullCheck = null;
     private float _timer;
-    [SerializeField, Range(2f, 5f)]
+    [SerializeField, Range(0.5f, 5f)]
     private float timerMax = 2f;
 
     private int _fallCount = 0;
@@ -35,6 +35,8 @@ public class GridManager : Subject
         EventManager.CleanRow += OnCleanRow;
         InputManager.fallDirectionChanged += ChangeFallDirection;
         InputManager.blockHorizontalMovement += ChangeHorizontalDirection;
+        InputManager.SpeedUp += OnSpeedUp;
+        InputManager.ResetSpeed += OnResetSpeed;
         EventManager.ReadyForSpawn += ResetFallCount;
         _timer = 0f;
     }
@@ -121,5 +123,19 @@ public class GridManager : Subject
     public void GameOver()
     {
         _gameOver = true;
+    }
+
+    private void OnSpeedUp()
+    {
+        if (timerMax - 0.5f >= 0.5f)
+        {
+            timerMax -= 0.5f;
+        }
+    }
+
+    private void OnResetSpeed()
+    {
+        timerMax = 2f;
+        _timer = 0f;
     }
 }
