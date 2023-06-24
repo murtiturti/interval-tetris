@@ -33,6 +33,7 @@ public class ContainerManager : MonoBehaviour
             {
                 cont.RemoveFirstAdded();
             }
+            EventManager.InvokeMakeFall(true);
         }
         else
         {
@@ -40,6 +41,7 @@ public class ContainerManager : MonoBehaviour
             {
                 cont.RemoveFirstAdded();
             }
+            EventManager.InvokeMakeFall(false);
         }
     }
 

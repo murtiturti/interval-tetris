@@ -9,11 +9,13 @@ public class EventManager : MonoBehaviour
     public static event Action<int, int, Block> BlockPlaced; // position, block
     public static event Action<Block> BlockDestroyed; // Destroyed block
     public static event Action<bool> CleanRow; //bool indicates bottom
+    public static event Action<bool> MakeFall; //bool indicates bottom 
     public static event Action ReadyForSpawn; //Event to notify that the grid is ready for a new block to spawn
     public static event Action GameOver; //Event to notify that the game is over
     public static event Action<int> ScoreChanged; //Event to notify that the score has changed
     public static event Action<int, UIManager.UpdateType> UpdateUI; //Event to notify that the UI needs to be updated
     public static event Action<string> UpdateInterval; //Event to notify that the interval needs to be updated
+    
     
     public static void SetCellOccupation(int x, int y, bool occupied)
     {
@@ -33,6 +35,11 @@ public class EventManager : MonoBehaviour
     public static void OnCleanRow(bool bottom)
     {
         CleanRow?.Invoke(bottom);
+    }
+
+    public static void InvokeMakeFall(bool bottom)
+    {
+        MakeFall?.Invoke(bottom);
     }
     
     public static void OnReadyForSpawn()

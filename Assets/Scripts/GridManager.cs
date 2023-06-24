@@ -18,7 +18,6 @@ public class GridManager : Subject
     [SerializeField, Range(0.5f, 5f)]
     private float timerMax = 2f;
 
-    private int _fallCount = 0;
     private float _intervalTimer = 0f;
     
     private bool _gameOver = false;
@@ -33,12 +32,12 @@ public class GridManager : Subject
     {
         EventManager.CellOccupation += CellOccupied;
         EventManager.BlockDestroyed += RemoveObserver;
-        EventManager.CleanRow += OnCleanRow;
+        //EventManager.CleanRow += OnCleanRow;
+        EventManager.MakeFall += OnCleanRow;
         InputManager.fallDirectionChanged += ChangeFallDirection;
         InputManager.blockHorizontalMovement += ChangeHorizontalDirection;
         InputManager.SpeedUp += OnSpeedUp;
         InputManager.ResetSpeed += OnResetSpeed;
-        EventManager.ReadyForSpawn += ResetFallCount;
         _timer = 0f;
     }
 
@@ -59,7 +58,6 @@ public class GridManager : Subject
         if (_timer >= timerMax)
         {
             _timer = 0f;
-            _fallCount++;
             if (_lastSpawned.blockState == BlockStates.Falling)
             {
                 int projectedY = _lastSpawned.fallDirection == Block.FallDirection.Down ? _lastSpawned.y - 1 : _lastSpawned.y + 1;
@@ -116,11 +114,6 @@ public class GridManager : Subject
             return;
         }
         _lastSpawned.blockDirection = Block.BlockDirection.None;
-    }
-    
-    private void ResetFallCount()
-    {
-        _fallCount = 0;
     }
     
     public void GameOver()
