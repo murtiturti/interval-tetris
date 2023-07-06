@@ -12,4 +12,14 @@ public class MenuButton : MonoBehaviour
         SharedData.Difficulty = difficulty;
         UnityEngine.SceneManagement.SceneManager.LoadScene(1);
     }
+
+    public void SetActive(GameObject obj)
+    {
+        obj.SetActive(true);
+    }
+    
+    public void SetInactive(GameObject obj)
+    {
+        obj.SetActive(false);
+    }
 }
