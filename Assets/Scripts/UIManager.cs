@@ -11,6 +11,12 @@ public class UIManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI scoreText, highScoreText;
     [SerializeField] private GameObject gameOverPanel;
     [SerializeField] private TextMeshProUGUI intervalText;
+    [SerializeField] private TextMeshProUGUI answerText; // only on hard mode
+
+    private String _interval;
+
+    [Range(1f, 3f)]
+    public float flashTime = 2f;
 
     public enum UpdateType
     {
@@ -28,11 +34,16 @@ public class UIManager : MonoBehaviour
         EventManager.GameOver += OnGameOver;
         EventManager.UpdateUI += UpdateUI;
         EventManager.UpdateInterval += OnUpdateInterval;
+        EventManager.FlashAnswer += FlashAnswer;
+        if (SharedData.Difficulty == DifficultySetting.Hard)
+        {
+            intervalText.gameObject.SetActive(false);
+        }
     }
 
     public void RestartGame()
     {
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene(1);
     }
 
     public void OnGameOver()
@@ -62,8 +73,35 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    public void OnUpdateInterval(string interval)
+    public void OnUpdateInterval(string interval, bool ascending)
     {
-        intervalText.text = $"Interval: {interval}";
+        var ascendText = ascending ? "Ascending" : "Descending";
+        _interval = interval + " " + ascendText;
+        intervalText.text = $"Interval: {interval} {ascendText}";
     }
+
+    private void FlashAnswer(bool isCorrect)
+    {
+        StartCoroutine(FlashText(isCorrect, answerText));
+    }
+
+    private IEnumerator FlashText(bool correct, TMPro.TMP_Text text)
+    {
+        var counter = 0f;
+        text.gameObject.SetActive(true);
+        text.text = _interval;
+        text.color = correct ? Color.green : Color.red;
+        while (counter < flashTime)
+        {
+            counter += Time.deltaTime;
+            yield return null;
+        }
+        text.gameObject.SetActive(false);
+    }
+    
+    public void Pause(bool paused)
+    {
+        EventManager.OnGamePaused(paused);
+    }
+    
 }

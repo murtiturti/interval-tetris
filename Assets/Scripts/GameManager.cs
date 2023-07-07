@@ -17,6 +17,10 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private GridManager gridManager;
 
+    private bool _ascending;
+    
+    private DifficultySetting _difficulty = SharedData.Difficulty;
+
     private string[] _noteNames = new[] {"A", "Bb", "B", "C", "Db", "D", "Eb", "E", "F", "Gb", "G", "Ab"};
     private Dictionary<string, float> _noteFrequencies = new Dictionary<string, float>()
     {
@@ -72,8 +76,18 @@ public class GameManager : MonoBehaviour
         var interval = "";
         var freq2 = 0f;
         var note2 = "";
-        IntervalGenerator.ChooseInterval(out interval, freq, out freq2, note, out note2);
-        var spawned = spawner.Spawn(gridManager.Grid.GetCellWorldPosition(2, 5), note2, note);
+        _ascending = _difficulty == DifficultySetting.Easy ? true : Utilities.RandomBool();
+        Debug.Log(_ascending);
+        IntervalGenerator.ChooseInterval(out interval, freq, out freq2, note, out note2, _difficulty);
+        var spawned = new Block();
+        if (_ascending)
+        {
+            spawned = spawner.Spawn(gridManager.Grid.GetCellWorldPosition(2, 5), note2, note);
+        }
+        else
+        {
+            spawned = spawner.Spawn(gridManager.Grid.GetCellWorldPosition(2, 5), note, note2);
+        }
         AudioClip firstClip = null;
         AudioClip secondClip = null;
         IntervalGenerator.CreateClip(freq, out firstClip);
@@ -81,8 +95,9 @@ public class GameManager : MonoBehaviour
         IntervalPlayer.Instance.SetFirstClip(firstClip);
         IntervalPlayer.Instance.SetSecondClip(secondClip);
         gridManager.SetLastSpawned(spawned);
-        IntervalPlayer.Instance.PlayInterval(true);
-        EventManager.UpdateIntervalUI(interval);
+        IntervalPlayer.Instance.PlayInterval(_ascending);
+        gridManager.SetAscending(_ascending);
+        EventManager.UpdateIntervalUI(interval, _ascending);
     }
 
     public void AddScore(int score)

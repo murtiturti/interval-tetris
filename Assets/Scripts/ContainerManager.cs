@@ -65,6 +65,10 @@ public class ContainerManager : MonoBehaviour
         var container = GetContainer(bottom, index);
         container.AddToStack(block);
         var isCorrect = container.CheckPlacement(block);
+        if (SharedData.Difficulty == DifficultySetting.Hard)
+        {
+            EventManager.InvokeFlash(isCorrect);
+        }
         if (isCorrect)
         {
             container.OnCorrectPlacement();
