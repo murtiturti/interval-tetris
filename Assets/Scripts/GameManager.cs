@@ -76,9 +76,9 @@ public class GameManager : MonoBehaviour
         var interval = "";
         var freq2 = 0f;
         var note2 = "";
-        _ascending = Utilities.RandomBool();
+        _ascending = _difficulty == DifficultySetting.Easy ? true : Utilities.RandomBool();
         Debug.Log(_ascending);
-        IntervalGenerator.ChooseInterval(out interval, freq, out freq2, note, out note2);
+        IntervalGenerator.ChooseInterval(out interval, freq, out freq2, note, out note2, _difficulty);
         var spawned = new Block();
         if (_ascending)
         {
@@ -97,7 +97,7 @@ public class GameManager : MonoBehaviour
         gridManager.SetLastSpawned(spawned);
         IntervalPlayer.Instance.PlayInterval(_ascending);
         gridManager.SetAscending(_ascending);
-        EventManager.UpdateIntervalUI(interval);
+        EventManager.UpdateIntervalUI(interval, _ascending);
     }
 
     public void AddScore(int score)
