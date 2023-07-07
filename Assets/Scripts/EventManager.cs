@@ -14,7 +14,9 @@ public class EventManager : MonoBehaviour
     public static event Action GameOver; //Event to notify that the game is over
     public static event Action<int> ScoreChanged; //Event to notify that the score has changed
     public static event Action<int, UIManager.UpdateType> UpdateUI; //Event to notify that the UI needs to be updated
-    public static event Action<string> UpdateInterval; //Event to notify that the interval needs to be updated
+    public static event Action<string, bool> UpdateInterval; //Event to notify that the interval needs to be updated
+
+    public static event Action<bool> FlashAnswer; //Event to notify that the answer needs to be flashed
     
     
     public static void SetCellOccupation(int x, int y, bool occupied)
@@ -62,8 +64,13 @@ public class EventManager : MonoBehaviour
         UpdateUI?.Invoke(score, type);
     }
     
-    public static void UpdateIntervalUI(string interval)
+    public static void UpdateIntervalUI(string interval, bool ascending)
     {
-        UpdateInterval?.Invoke(interval);
+        UpdateInterval?.Invoke(interval, ascending);
+    }
+    
+    public static void InvokeFlash(bool flash)
+    {
+        FlashAnswer?.Invoke(flash);
     }
 }
