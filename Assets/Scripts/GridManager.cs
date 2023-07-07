@@ -21,6 +21,7 @@ public class GridManager : Subject
     private float _intervalTimer = 0f;
     
     private bool _gameOver = false;
+    private bool _ascending;
 
     private void Awake()
     {
@@ -74,7 +75,7 @@ public class GridManager : Subject
 
         if (_intervalTimer >= 2.5f)
         {
-            IntervalPlayer.Instance.PlayInterval(true);
+            IntervalPlayer.Instance.PlayInterval(_ascending);
             _intervalTimer = 0f;
         }
     }
@@ -133,5 +134,11 @@ public class GridManager : Subject
     {
         timerMax = 2f;
         _timer = 0f;
+    }
+    
+    public void SetAscending(bool ascending)
+    {
+        //Only to be used by the GameManager
+        _ascending = ascending;
     }
 }
