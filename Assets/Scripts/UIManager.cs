@@ -12,8 +12,6 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject gameOverPanel;
     [SerializeField] private TextMeshProUGUI intervalText;
     [SerializeField] private TextMeshProUGUI answerText; // only on hard mode
-    [SerializeField] private GameObject helpPanel;
-    [SerializeField] private GameObject pausePanel;
 
     private String _interval;
 

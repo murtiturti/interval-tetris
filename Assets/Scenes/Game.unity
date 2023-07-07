@@ -1797,8 +1797,6 @@ MonoBehaviour:
   gameOverPanel: {fileID: 254681835}
   intervalText: {fileID: 1824176989}
   answerText: {fileID: 277470069}
-  helpPanel: {fileID: 0}
-  pausePanel: {fileID: 0}
   flashTime: 2
 --- !u!4 &693347892
 Transform:
@@ -3810,7 +3808,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_TargetDisplay: 0
 --- !u!224 &1134422212
 RectTransform:
