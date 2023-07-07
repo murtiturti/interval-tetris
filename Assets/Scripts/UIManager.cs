@@ -12,6 +12,8 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject gameOverPanel;
     [SerializeField] private TextMeshProUGUI intervalText;
     [SerializeField] private TextMeshProUGUI answerText; // only on hard mode
+    [SerializeField] private GameObject helpPanel;
+    [SerializeField] private GameObject pausePanel;
 
     private String _interval;
 
@@ -80,7 +82,7 @@ public class UIManager : MonoBehaviour
         intervalText.text = $"Interval: {interval} {ascendText}";
     }
 
-    public void FlashAnswer(bool isCorrect)
+    private void FlashAnswer(bool isCorrect)
     {
         StartCoroutine(FlashText(isCorrect, answerText));
     }
@@ -98,4 +100,10 @@ public class UIManager : MonoBehaviour
         }
         text.gameObject.SetActive(false);
     }
+    
+    public void Pause(bool paused)
+    {
+        EventManager.OnGamePaused(paused);
+    }
+    
 }
