@@ -80,7 +80,7 @@ public class UIManager : MonoBehaviour
         intervalText.text = $"Interval: {interval} {ascendText}";
     }
 
-    public void FlashAnswer(bool isCorrect)
+    private void FlashAnswer(bool isCorrect)
     {
         StartCoroutine(FlashText(isCorrect, answerText));
     }
@@ -98,4 +98,10 @@ public class UIManager : MonoBehaviour
         }
         text.gameObject.SetActive(false);
     }
+    
+    public void Pause(bool paused)
+    {
+        EventManager.OnGamePaused(paused);
+    }
+    
 }
