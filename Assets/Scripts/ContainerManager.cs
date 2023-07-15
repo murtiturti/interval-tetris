@@ -32,16 +32,18 @@ public class ContainerManager : MonoBehaviour
             foreach (var cont in bottomContainers)
             {
                 cont.RemoveFirstAdded();
+                StartCoroutine(cont.FallOnce(DirectionConstants.down));
             }
-            EventManager.InvokeMakeFall(true);
+            //EventManager.InvokeMakeFall(true);
         }
         else
         {
             foreach (var cont in topContainers)
             {
                 cont.RemoveFirstAdded();
+                StartCoroutine(cont.FallOnce(DirectionConstants.up));
             }
-            EventManager.InvokeMakeFall(false);
+            //EventManager.InvokeMakeFall(false);
         }
     }
 

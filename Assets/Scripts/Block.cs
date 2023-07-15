@@ -143,7 +143,7 @@ public class Block : MonoBehaviour, IObserver
         fallDirection = direction;
     }
 
-    private void Move(Vector3 direction)
+    public void Move(Vector3 direction)
     {
         transform.position += direction;
         EventManager.SetCellOccupation(x, y, false);

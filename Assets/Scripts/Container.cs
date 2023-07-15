@@ -9,7 +9,7 @@ public class Container : MonoBehaviour
     public bool bottom;
 
     [SerializeField] private List<Block> stack = new List<Block>();
-    
+
     // Start is called before the first frame update
     void Start()
     {
@@ -54,7 +54,6 @@ public class Container : MonoBehaviour
             EventManager.SetCellOccupation(temp.x, temp.y, false);
             EventManager.OnBlockDestroyed(temp);
             Destroy(temp.gameObject);
-            // TODO: make fall
         }
     }
 
@@ -63,14 +62,18 @@ public class Container : MonoBehaviour
         if (stack.Count >= 2)
         {
             // Clear stack
+            /*
             foreach (var block in stack.ToArray())
             {
                 EventManager.SetCellOccupation(block.x, block.y, false);
-                // TODO: Unsubscribe from block from GridManager
+                // TODO: Unsubscribe block from GridManager
                 EventManager.OnBlockDestroyed(block);
                 stack.Remove(block);
                 Destroy(block.gameObject);
             }
+            */
+            var dir = bottom ? DirectionConstants.down : DirectionConstants.up;
+            StartCoroutine(MakeWholeStackFall(dir));
             EventManager.OnScoreChange(50);
             return;
         }
@@ -82,6 +85,45 @@ public class Container : MonoBehaviour
     public bool IsStackFull()
     {
         return stack.Count > 5;
+    }
+
+    private IEnumerator MakeWholeStackFall(Vector3 direction)
+    {
+        // Makes the whole stack fall out of the grid
+        while (stack.Count != 0)
+        {
+            var temp = stack[0];
+            EventManager.SetCellOccupation(temp.x, temp.y, false);
+            EventManager.OnBlockDestroyed(temp);
+            stack.Remove(temp);
+            Destroy(temp.gameObject);
+            if (stack.Count == 0)
+            {
+                yield return null;
+            }
+            yield return StartCoroutine(FallOnce(direction));
+        }
+    }
+
+    public IEnumerator FallOnce(Vector3 direction)
+    {
+        // Makes every block in the stack fall one cell
+        // Does NOT handle destroying blocks
+        var timeMax = 0.2f;
+        var time = 0f;
+        var remStackSize = stack.Count;
+        for (int i = 0; i < remStackSize; i++)
+        {
+            
+            while (time < timeMax)
+            {
+                time += Time.deltaTime;
+                yield return null;
+            }
+            stack[i].Move(direction);
+            time = 0f;
+            timeMax /= 2f;
+        }
     }
 
     public bool NeedsRowClean()
