@@ -54,7 +54,6 @@ public class Container : MonoBehaviour
             EventManager.SetCellOccupation(temp.x, temp.y, false);
             EventManager.OnBlockDestroyed(temp);
             Destroy(temp.gameObject);
-            // TODO: make fall
         }
     }
 
@@ -94,6 +93,7 @@ public class Container : MonoBehaviour
         while (stack.Count != 0)
         {
             var temp = stack[0];
+            EventManager.SetCellOccupation(temp.x, temp.y, false);
             EventManager.OnBlockDestroyed(temp);
             stack.Remove(temp);
             Destroy(temp.gameObject);
@@ -105,23 +105,24 @@ public class Container : MonoBehaviour
         }
     }
 
-    private IEnumerator FallOnce(Vector3 direction)
+    public IEnumerator FallOnce(Vector3 direction)
     {
         // Makes every block in the stack fall one cell
         // Does NOT handle destroying blocks
-        var timeMax = 0.5f;
+        var timeMax = 0.2f;
         var time = 0f;
         var remStackSize = stack.Count;
         for (int i = 0; i < remStackSize; i++)
         {
-            stack[i].Move(direction);
+            
             while (time < timeMax)
             {
                 time += Time.deltaTime;
                 yield return null;
             }
+            stack[i].Move(direction);
             time = 0f;
-            timeMax -= 0.1f;
+            timeMax /= 2f;
         }
     }
 
