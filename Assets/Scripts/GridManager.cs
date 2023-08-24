@@ -24,9 +24,13 @@ public class GridManager : Subject
     private bool _gamePaused = false;
     private bool _ascending;
 
+    private Sprite _cellSprite;
+
     private void Awake()
     {
         _grid = new Grid(6, 11, 12f/11f, Vector3.down * 7f + Vector3.left * 3.25f);
+        _cellSprite = Resources.Load<Sprite>("Sprites/CellSprite3");
+        SetGridGraphics();
     }
 
     // Start is called before the first frame update
@@ -152,5 +156,22 @@ public class GridManager : Subject
     public void PauseGame(bool pause)
     {
         _gamePaused = pause;
+    }
+
+    private void SetGridGraphics()
+    {
+        foreach (var cell in _grid.GetGridArray())
+        {
+            var cellObject = new GameObject("Cell" + cell.GetX() + cell.GetY());
+            cellObject.transform.position = cell.GetCenterWorldPosition();
+            var spriteRenderer = cellObject.AddComponent<SpriteRenderer>();
+            spriteRenderer.sprite = _cellSprite;
+            spriteRenderer.sortingOrder = -1;
+            Vector2 spriteSize = spriteRenderer.bounds.size;
+            var scaleX = cell.GetSize() / spriteSize.x;
+            var scaleY = cell.GetSize() / spriteSize.y;
+
+            spriteRenderer.transform.localScale = new Vector3(scaleX, scaleY, 1f);
+        }
     }
 }

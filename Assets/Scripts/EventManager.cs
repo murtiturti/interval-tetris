@@ -17,6 +17,7 @@ public class EventManager : MonoBehaviour
     public static event Action<string, bool> UpdateInterval; //Event to notify that the interval needs to be updated
     public static event Action<bool> FlashAnswer; //Event to notify that the answer needs to be flashed
     public static event Action<bool> GamePaused; //Subscribed in GridManager
+    public static event Action NextTutorial; 
 
 
     public static void SetCellOccupation(int x, int y, bool occupied)
@@ -77,5 +78,10 @@ public class EventManager : MonoBehaviour
     public static void OnGamePaused(bool isPaused)
     {
         GamePaused?.Invoke(isPaused);
+    }
+    
+    public static void OnNextTutorial()
+    {
+        NextTutorial?.Invoke();
     }
 }

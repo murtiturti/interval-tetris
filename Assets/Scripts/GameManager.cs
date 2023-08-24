@@ -41,6 +41,7 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Debug.Log(PlayerPrefs.GetInt("PlayedTutorial", 0));
         _score = 0;
         _highScore = PlayerPrefs.GetInt(HighScoreKey, 0);
         EventManager.ReadyForSpawn += OnSpawnReady;
