@@ -13,4 +13,6 @@ MonoBehaviour:
   m_Name: Panel2
   m_EditorClassIdentifier: 
   title: Vertical Movement
-  subtitle: Swipe Up or Down to change vertical direction of block.
+  subtitle: 
+  subtitles:
+  - Swipe Up or Down to change vertical direction of block.

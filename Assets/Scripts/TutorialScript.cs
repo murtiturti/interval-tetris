@@ -14,6 +14,7 @@ public class TutorialScript : MonoBehaviour
     [SerializeField] private GameObject subtitleTxtGameObject;
     [SerializeField] private List<TutorialData> tutorialDataList = new List<TutorialData>();
     [SerializeField] private GameObject startCountdownTxtGameObject;
+    [SerializeField] private GameObject layoutFrame;
     private int _tutorialIndex = 0;
     // Start is called before the first frame update
     void Start()
@@ -38,7 +39,9 @@ public class TutorialScript : MonoBehaviour
     {
         tutorialPanel.SetActive(true);
         titleTxtGameObject.GetComponent<TMPro.TextMeshProUGUI>().text = tutorialDataList[_tutorialIndex].title;
-        subtitleTxtGameObject.GetComponent<TMPro.TextMeshProUGUI>().text = tutorialDataList[_tutorialIndex].subtitle;
+        //subtitleTxtGameObject.GetComponent<TMPro.TextMeshProUGUI>().text = tutorialDataList[_tutorialIndex].subtitle;
+        ClearLayout();
+        FillLayout();
         EventManager.OnGamePaused(true);
     }
 
@@ -68,6 +71,25 @@ public class TutorialScript : MonoBehaviour
         }
 
         SceneManager.LoadScene(1);
+    }
+
+    private void FillLayout()
+    {
+        var tutorialData = tutorialDataList[_tutorialIndex];
+        var subtitles = tutorialData.subtitles;
+        foreach (var subtitle in subtitles)
+        {
+            var subtitleGameObject = Instantiate(subtitleTxtGameObject, layoutFrame.transform);
+            subtitleGameObject.GetComponent<TMPro.TextMeshProUGUI>().text = subtitle;
+        }
+    }
+
+    private void ClearLayout()
+    {
+        foreach (Transform child in layoutFrame.transform)
+        {
+            Destroy(child.gameObject);
+        }
     }
     
 }

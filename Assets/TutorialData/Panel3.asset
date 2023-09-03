@@ -13,4 +13,6 @@ MonoBehaviour:
   m_Name: Panel3
   m_EditorClassIdentifier: 
   title: Faster Fall
-  subtitle: Double-tap and hold to increase fall speed of block
+  subtitle: 
+  subtitles:
+  - Double-tap and hold to increase the fall speed of a block

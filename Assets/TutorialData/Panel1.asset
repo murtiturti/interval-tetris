@@ -13,4 +13,6 @@ MonoBehaviour:
   m_Name: Panel1
   m_EditorClassIdentifier: 
   title: Horizontal Movement
-  subtitle: Swipe left or right to move the block horizontally.
+  subtitle: 
+  subtitles:
+  - Swipe left or right to move the block horizontally.

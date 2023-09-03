@@ -13,7 +13,11 @@ MonoBehaviour:
   m_Name: Panel4
   m_EditorClassIdentifier: 
   title: How to Play
-  subtitle: 'On the top of the screen you will see the interval instruction. Your
-    goal is to find the match the block with the container that interval away from
-    the block.\n Ex: Interval: m2, Note: C Goal: C#\n You can use the Help Panel
-    (?) to see the half steps that correspond to each interval.'
+  subtitle: 
+  subtitles:
+  - On the top of the screen you will see the interval instruction.
+  - Your goal is to match the block with the container that interval away from the
+    block.
+  - 'Ex: Interval: m2, Note: C Goal: C#'
+  - You can use the Help Panel (?) to see the half steps that correspond to each
+    interval.
