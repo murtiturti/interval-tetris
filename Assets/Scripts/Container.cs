@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -9,6 +10,13 @@ public class Container : MonoBehaviour
     public bool bottom;
 
     [SerializeField] private List<Block> stack = new List<Block>();
+    private Sprite _contSprite;
+
+    private void Awake()
+    {
+        _contSprite = Resources.Load<Sprite>("Sprites/lightFactoryPanel");
+        ScaleSprite();
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -134,5 +142,18 @@ public class Container : MonoBehaviour
         }
 
         return false;
+    }
+
+    private void ScaleSprite()
+    {
+        var spriteRenderer = GetComponent<SpriteRenderer>();
+        spriteRenderer.sprite = _contSprite;
+        var sprite = spriteRenderer.sprite;
+        Vector2 spriteSize = sprite.bounds.size;
+        var cellSize = 12f / 11f;
+        var scaleX = cellSize / spriteSize.x;
+        var scaleY = cellSize / spriteSize.y;
+        
+        spriteRenderer.transform.localScale = new Vector3(scaleX, scaleY, 1f);
     }
 }

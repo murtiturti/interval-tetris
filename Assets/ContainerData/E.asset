@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c7ecf0e658db4a2086489ab38d23089, type: 3}
   m_Name: E
   m_EditorClassIdentifier: 
-  color: {r: 0.19607843, g: 0.9137255, b: 0.39607844, a: 1}
+  color: {r: 0.9411765, g: 0.8666667, b: 0.10980392, a: 1}
   name: E
