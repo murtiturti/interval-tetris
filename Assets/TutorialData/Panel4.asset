@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9bab478215b914346b4b82c58dc0cf2f, type: 3}
+  m_Name: Panel4
+  m_EditorClassIdentifier: 
+  title: How to Play
+  subtitle: 
+  subtitles:
+  - On the top of the screen you will see the interval instruction.
+  - Your goal is to match the block with the container that interval away from the
+    block.
+  - 'Ex: Interval: m2, Note: C Goal: C#'
+  - You can use the Help Panel (?) to see the half steps that correspond to each
+    interval.

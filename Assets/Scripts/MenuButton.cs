@@ -10,6 +10,11 @@ public class MenuButton : MonoBehaviour
     public void OnButtonPressed()
     {
         SharedData.Difficulty = difficulty;
+        if (PlayerPrefs.GetInt("PlayedTutorial", 0) == 0)
+        {
+            UnityEngine.SceneManagement.SceneManager.LoadScene(2);
+            return;
+        }
         UnityEngine.SceneManagement.SceneManager.LoadScene(1);
     }
 

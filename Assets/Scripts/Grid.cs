@@ -32,6 +32,11 @@ public class Grid
         Debug.DrawLine(GetPosition(0, height), GetPosition(width, height), Color.white, 100f);
         Debug.DrawLine(GetPosition(width, 0), GetPosition(width, height), Color.white, 100f);
     }
+    
+    public Cell[,] GetGridArray()
+    {
+        return gridArray;
+    }
 
     public Cell GetCell(int x, int y)
     {

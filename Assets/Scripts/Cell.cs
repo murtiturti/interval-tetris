@@ -7,9 +7,6 @@ public class Cell
     private bool occupied;
     private Vector3 originPos;
 
-    //TODO: See if I need this
-    //public Subject subject;
-    
     public Cell(int x, int y, float size, Vector3 originPos)
     {
         this.x = x;
@@ -44,6 +41,11 @@ public class Cell
     public void SetOccupied(bool occupied)
     {
         this.occupied = occupied;
+    }
+    
+    public float GetSize()
+    {
+        return size;
     }
 
     

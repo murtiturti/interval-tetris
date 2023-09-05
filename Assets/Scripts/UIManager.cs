@@ -103,5 +103,10 @@ public class UIManager : MonoBehaviour
     {
         EventManager.OnGamePaused(paused);
     }
+
+    public void LoadScene(int sceneIndex)
+    {
+        SceneManager.LoadScene(sceneIndex);
+    }
     
 }

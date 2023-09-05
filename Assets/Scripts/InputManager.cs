@@ -84,16 +84,19 @@ public class InputManager : MonoBehaviour
     private void OnVerticalInput(Block.FallDirection dir)
     {
         fallDirectionChanged?.Invoke(dir);
+        EventManager.OnNextTutorial();
     }
     
     private void OnHorizontalInput(Block.BlockDirection dir)
     {
         blockHorizontalMovement?.Invoke(dir);
+        EventManager.OnNextTutorial();
     }
     
     private void InvokeSpeedUp()
     {
         SpeedUp?.Invoke();
+        EventManager.OnNextTutorial();
     }
     
     private void InvokeResetSpeed()
