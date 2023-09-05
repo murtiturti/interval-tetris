@@ -103,4 +103,16 @@ public class IntervalPlayer : MonoBehaviour
     {
         _secondNote = clip;
     }
+
+    public IEnumerator Play()
+    {
+        _audioSource.clip = _firstNote;
+        _audioSource.Play();
+        while (_audioSource.isPlaying)
+        {
+            yield return null;
+        }
+        _audioSource.clip = _secondNote;
+        _audioSource.Play();
+    }
 }
