@@ -1,0 +1,121 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: ElectricPiano
+  m_EditorClassIdentifier: 
+  m_GroupName: ElectricPiano
+  m_Data:
+    m_SerializedData: []
+  m_GUID: 5eecded5741f94a33a630ac994362754
+  m_SerializeEntries:
+  - m_GUID: 9ae57548a0bf64f8c9c9f8322642de15
+    m_Address: LP/G3
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: fefebb8a856aa448d9abf9c9d31e8ad7
+    m_Address: LP/G2
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 18cf47358aed64694addf1c9afb554f1
+    m_Address: LP/Db2
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: e3ad81164485341e49566f79ae87ecb7
+    m_Address: LP/E2
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: dda4d7b66126b4867a0227306aa966c2
+    m_Address: LP/C3
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: da3340be7961746e99b0c1545ee5427d
+    m_Address: LP/F3
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 5006cda485b8a42eb81260f4445f3f81
+    m_Address: LP/Db3
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 520b479711c9c49e78a063f625600f97
+    m_Address: LP/F2
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: e07b9dca2b82c40c39e5b1fd4e4c76ed
+    m_Address: LP/B2
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 96f33b617df3d4740bf5e1eb0a02a0dc
+    m_Address: LP/C2
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 5048449bdb0294ef395a5db5d6d34d00
+    m_Address: LP/Gb3
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: fe9b1cb8b144b4b7caedc18d30488cb2
+    m_Address: LP/D3
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 8cd4d4b07533b4851b43f9d835f021e0
+    m_Address: LP/Eb2
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 4cfe057848c4c4222b449cc672ce9fc7
+    m_Address: LP/D2
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 42ef1e40776d0414b803f61f308ecb9b
+    m_Address: LP/B3
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 3c4aee9a47cef491ea8270213ffcfbe9
+    m_Address: LP/Eb3
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: eb5cff34ee85a42868fd698ebcfca4bc
+    m_Address: LP/E3
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 0d04d55e4f77e4576a9ced4f7e2a9101
+    m_Address: LP/Ab2
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 944e25866c8a34453825faf2ce2b0e04
+    m_Address: LP/A2
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 851fc7e4cef39413390e292829df9012
+    m_Address: LP/Gb2
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 71f4ed3a271f440b49ce13cfcf00dc3f
+    m_Address: LP/Bb2
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: ab401fb65427441209df18f16580c52b
+    m_Address: LP/Bb3
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: bd8884dae72554dc79596b6d5dd96c6f
+    m_Address: LP/Ab3
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 46302acdd5e7343cdb3583bf53206eb7
+    m_Address: LP/A3
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: 79183a08931674e1695ae73cb81be168, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: b8c246cc099904209a3e19a817a376e2, type: 2}
+    - {fileID: 11400000, guid: 614a33b3883b7489a8507a560f63db41, type: 2}
