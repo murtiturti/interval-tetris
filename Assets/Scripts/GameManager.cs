@@ -71,6 +71,7 @@ public class GameManager : MonoBehaviour
 
     private void OnSpawnReady()
     {
+        /*
         IntervalPlayer.Instance.StopInterval();
         var note = PickNote();
         var freq = GetFrequencyOf(note);
@@ -97,6 +98,19 @@ public class GameManager : MonoBehaviour
         IntervalPlayer.Instance.SetSecondClip(secondClip);
         gridManager.SetLastSpawned(spawned);
         IntervalPlayer.Instance.PlayInterval(_ascending);
+        gridManager.SetAscending(_ascending);
+        EventManager.UpdateIntervalUI(interval, _ascending);
+        */
+        IntervalPlayer.Instance.StopInterval();
+        _ascending = _difficulty == DifficultySetting.Easy ? true : Utilities.RandomBool();
+        IntervalPicker.PickNotes(out var note1, out var note2, out var note1Octave, out var note2Octave, out var interval, _ascending, _difficulty);
+        var spawned = spawner.Spawn(gridManager.Grid.GetCellWorldPosition(2, 5), note2, note1);
+        var firstClip = NoteLoader.LoadAudioClip(note1 + note1Octave);
+        var secondClip = NoteLoader.LoadAudioClip(note2 + note2Octave);
+        IntervalPlayer.Instance.SetFirstClip(firstClip);
+        IntervalPlayer.Instance.SetSecondClip(secondClip);
+        gridManager.SetLastSpawned(spawned);
+        StartCoroutine(IntervalPlayer.Instance.Play());
         gridManager.SetAscending(_ascending);
         EventManager.UpdateIntervalUI(interval, _ascending);
     }

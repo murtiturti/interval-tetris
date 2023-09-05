@@ -12,15 +12,15 @@ public static class IntervalPicker
     private static string[] _intervals = 
         {"Unison", "m2", "M2", "m3", "M3", "P4", "Tritone", "P5", "m6", "M6", "m7", "M7", "Octave"};
 
-    public static void PickNotes(out string note1, out string note2, 
+    public static void PickNotes(out string note1, out string note2, out int note1Octave, out int note2Octave,
         out string interval, bool ascending, DifficultySetting difficulty)
     {
-        var note1Octave = ascending ? 
+       note1Octave = ascending ? 
             _octaves[Random.Range(0, _octaves.Length - 1)] : _octaves[Random.Range(1, _octaves.Length)];
         note1 = _notes[Random.Range(0, _notes.Length)];
         var step = difficulty == DifficultySetting.Easy ? Random.Range(1, 7) : Random.Range(0, _intervals.Length);
         interval = _intervals[step];
-        var note2Octave = note1Octave;
+        note2Octave = note1Octave;
         note2 = GetNoteByStep(note1, step, ascending, out var octaveChange);
         if (octaveChange && !ascending)
         {
@@ -32,9 +32,6 @@ public static class IntervalPicker
             // If an octave change is required and the interval is ascending, the octave of the second note must be higher
             note2Octave = note1Octave + 1;
         }
-
-        note1 += note1Octave;
-        note2 += note2Octave;
     }
     
     

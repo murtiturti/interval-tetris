@@ -86,7 +86,7 @@ public class GridManager : Subject
 
         if (_intervalTimer >= 2.5f)
         {
-            IntervalPlayer.Instance.PlayInterval(_ascending);
+            IntervalPlayer.Instance.PlayInterval();
             _intervalTimer = 0f;
         }
     }

@@ -45,9 +45,9 @@ public class IntervalPlayer : MonoBehaviour
         _audioSource = GetComponent<AudioSource>();
     }
 
-    public void PlayInterval(bool ascending)
+    public void PlayInterval()
     {
-        _playIntervalCoroutine = StartCoroutine(PlayIntervalCoroutine(ascending));
+        _playIntervalCoroutine = StartCoroutine(Play());
     }
     
     public void StopInterval()
