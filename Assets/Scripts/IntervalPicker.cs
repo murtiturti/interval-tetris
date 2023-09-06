@@ -8,7 +8,7 @@ public static class IntervalPicker
 {
     // Start is called before the first frame update
     private static string[] _notes = {"C", "Db", "D", "Eb", "E", "F", "Gb", "G", "Ab", "A", "Bb", "B"};
-    private static int[] _octaves = {2, 3};
+    private static int[] _octaves = {2, 3, 4};
     private static string[] _intervals = 
         {"Unison", "m2", "M2", "m3", "M3", "P4", "Tritone", "P5", "m6", "M6", "m7", "M7", "Octave"};
 
