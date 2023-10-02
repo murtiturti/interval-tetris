@@ -45,9 +45,9 @@ public class IntervalPlayer : MonoBehaviour
         _audioSource = GetComponent<AudioSource>();
     }
 
-    public void PlayInterval(bool ascending)
+    public void PlayInterval()
     {
-        _playIntervalCoroutine = StartCoroutine(PlayIntervalCoroutine(ascending));
+        _playIntervalCoroutine = StartCoroutine(Play());
     }
     
     public void StopInterval()
@@ -102,5 +102,17 @@ public class IntervalPlayer : MonoBehaviour
     public void SetSecondClip(AudioClip clip)
     {
         _secondNote = clip;
+    }
+
+    public IEnumerator Play()
+    {
+        _audioSource.clip = _firstNote;
+        _audioSource.Play();
+        while (_audioSource.isPlaying)
+        {
+            yield return null;
+        }
+        _audioSource.clip = _secondNote;
+        _audioSource.Play();
     }
 }

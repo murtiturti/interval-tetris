@@ -17,7 +17,14 @@ public class EventManager : MonoBehaviour
     public static event Action<string, bool> UpdateInterval; //Event to notify that the interval needs to be updated
     public static event Action<bool> FlashAnswer; //Event to notify that the answer needs to be flashed
     public static event Action<bool> GamePaused; //Subscribed in GridManager
-    public static event Action NextTutorial; 
+    public static event Action NextTutorial;
+
+    public static event Action SetLastSpawned;
+
+    public static void ForceSetLastSpawned()
+    {
+        SetLastSpawned?.Invoke();
+    }
 
 
     public static void SetCellOccupation(int x, int y, bool occupied)

@@ -9,7 +9,7 @@ public class Container : MonoBehaviour
     public ContainerData containerData;
     public bool bottom;
 
-    [SerializeField] private List<Block> stack = new List<Block>();
+    [SerializeField] private List<Block> stack;
     private Sprite _contSprite;
 
     private void Awake()
@@ -23,6 +23,7 @@ public class Container : MonoBehaviour
     {
         GetComponent<SpriteRenderer>().color = containerData.color;
         GetComponentInChildren<TextMeshProUGUI>().text = containerData.name;
+        stack = new List<Block>();
     }
 
     public bool CheckPlacement(Block block)

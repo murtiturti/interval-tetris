@@ -86,7 +86,7 @@ public class GridManager : Subject
 
         if (_intervalTimer >= 2.5f)
         {
-            IntervalPlayer.Instance.PlayInterval(_ascending);
+            IntervalPlayer.Instance.PlayInterval();
             _intervalTimer = 0f;
         }
     }
@@ -117,7 +117,10 @@ public class GridManager : Subject
     
     private void ChangeHorizontalDirection(Block.BlockDirection direction)
     {
-        // TODO: Add occupancy check
+        if (ReferenceEquals(_lastSpawned, nullCheck))
+        {
+            EventManager.ForceSetLastSpawned();
+        }
         var x = _lastSpawned.x;
         x += direction == Block.BlockDirection.Left ? -1 : 1;
         if (!_grid.CheckHorizontalBounds(x) && !_grid.GetCell(x, _lastSpawned.y).IsOccupied())
