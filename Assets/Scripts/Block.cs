@@ -39,44 +39,7 @@ public class Block : MonoBehaviour, IObserver
         GetComponent<SpriteRenderer>().color = blockData.color;
         GetComponentInChildren<TextMeshProUGUI>().text = blockData.name;
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        /*
-        _timer += Time.deltaTime;
-        if (_timer >= timerMax)
-        {
-            if (blockState == BlockStates.Falling)
-            {
-                if (fallDirection == FallDirection.Down)
-                {
-                    Move(Vector3.down);
-                }
-                else if (fallDirection == FallDirection.Up)
-                {
-                    Move(Vector3.up);
-                }
-            }
-            else if (blockState == BlockStates.Idle)
-            {
-                blockState = BlockStates.Placed;
-                EventManager.CallBlockPlaced(x, y, this);
-            }
-            _timer = 0f;
-        }
-        if (blockDirection == BlockDirection.Left)
-        {
-            Move(Vector3.left);
-            blockDirection = BlockDirection.None;
-        }
-        else if (blockDirection == BlockDirection.Right)
-        {
-            Move(Vector3.right);
-            blockDirection = BlockDirection.None;
-        }
-        */
-    }
+    
 
     public void SetPlaced(bool placed)
     {
