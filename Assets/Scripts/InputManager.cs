@@ -116,19 +116,16 @@ public class InputManager : MonoBehaviour
         {
             _firstClick = false;
             _timeOutTimer = 0f;
-            Debug.Log("Time Out");
         }
 
         if (Input.GetMouseButtonDown(0) && _firstClick)
         {
             // second click
             _doubleClick = true;
-            Debug.Log("Double Click");
         }
         else if (Input.GetMouseButtonDown(0))
         {
             _firstClick = true;
-            Debug.Log("First Click");
         }
 
         if (Input.GetMouseButton(0) && _doubleClick)

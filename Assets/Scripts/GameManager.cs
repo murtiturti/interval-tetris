@@ -45,7 +45,6 @@ public class GameManager : MonoBehaviour
         EventManager.ReadyForSpawn += OnSpawnReady;
         EventManager.GameOver += OnGameOver;
         EventManager.ScoreChanged += AddScore;
-        EventManager.SetLastSpawned += SetLastSpawned;
     }
 
     // Start is called before the first frame update
@@ -111,8 +110,14 @@ public class GameManager : MonoBehaviour
 
     private void OnGameOver()
     {
-        Debug.Log("Game over");
         PlayerPrefs.SetInt(HighScoreKey, _highScore);
         gridManager.GameOver();
+    }
+
+    private void OnDisable()
+    {
+        EventManager.ReadyForSpawn -= OnSpawnReady;
+        EventManager.GameOver -= OnGameOver;
+        EventManager.ScoreChanged -= AddScore;
     }
 }
