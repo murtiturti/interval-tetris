@@ -43,7 +43,7 @@ public class UIManager : MonoBehaviour
 
     public void RestartGame()
     {
-        SceneManager.LoadScene(1);
+        SceneManager.LoadSceneAsync(1);
     }
 
     public void OnGameOver()
@@ -108,5 +108,12 @@ public class UIManager : MonoBehaviour
     {
         SceneManager.LoadScene(sceneIndex);
     }
-    
+
+    private void OnDisable()
+    {
+        EventManager.GameOver -= OnGameOver;
+        EventManager.UpdateUI -= UpdateUI;
+        EventManager.UpdateInterval -= OnUpdateInterval;
+        EventManager.FlashAnswer -= FlashAnswer;
+    }
 }

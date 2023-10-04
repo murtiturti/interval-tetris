@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -85,5 +86,11 @@ public class ContainerManager : MonoBehaviour
             return;
         }
         EventManager.OnReadyForSpawn();
+    }
+
+    private void OnDisable()
+    {
+        EventManager.BlockPlaced -= OnBlockPlacement;
+        EventManager.CleanRow -= CleanRow;
     }
 }

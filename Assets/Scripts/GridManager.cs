@@ -6,7 +6,6 @@ using UnityEngine.Serialization;
 
 public class GridManager : Subject
 {
-
     private Grid _grid;
     
     public Grid Grid => _grid;
@@ -38,7 +37,6 @@ public class GridManager : Subject
     {
         EventManager.CellOccupation += CellOccupied;
         EventManager.BlockDestroyed += RemoveObserver;
-        //EventManager.CleanRow += OnCleanRow;
         EventManager.MakeFall += OnCleanRow;
         InputManager.fallDirectionChanged += ChangeFallDirection;
         InputManager.blockHorizontalMovement += ChangeHorizontalDirection;
@@ -117,10 +115,6 @@ public class GridManager : Subject
     
     private void ChangeHorizontalDirection(Block.BlockDirection direction)
     {
-        if (ReferenceEquals(_lastSpawned, nullCheck))
-        {
-            EventManager.ForceSetLastSpawned();
-        }
         var x = _lastSpawned.x;
         x += direction == Block.BlockDirection.Left ? -1 : 1;
         if (!_grid.CheckHorizontalBounds(x) && !_grid.GetCell(x, _lastSpawned.y).IsOccupied())
@@ -176,5 +170,17 @@ public class GridManager : Subject
 
             spriteRenderer.transform.localScale = new Vector3(scaleX, scaleY, 1f);
         }
+    }
+
+    private void OnDisable()
+    {
+        EventManager.CellOccupation -= CellOccupied;
+        EventManager.BlockDestroyed -= RemoveObserver;
+        EventManager.MakeFall -= OnCleanRow;
+        InputManager.fallDirectionChanged -= ChangeFallDirection;
+        InputManager.blockHorizontalMovement -= ChangeHorizontalDirection;
+        InputManager.SpeedUp -= OnSpeedUp;
+        InputManager.ResetSpeed -= OnResetSpeed;
+        EventManager.GamePaused -= PauseGame;
     }
 }
